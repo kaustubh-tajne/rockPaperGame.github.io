@@ -1,0 +1,187 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    /* background-color: rgb(230, 222, 222); */
+    font-family: sans-serif;
+    background-color: rgba(211, 208, 208, 0.479);
+}
+
+/* nav bar */
+#navBar{
+    display: flex;
+    background-color: rgb(32 ,32 ,32 );
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    color: #fff;
+}
+#navBar h2{
+    cursor: pointer;
+}
+#ulList{
+    display: flex;
+    align-items: center;
+}
+#ulList li{
+    list-style: none;
+}
+#ulList li a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    margin: 0 1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: large;
+}
+
+/* Info section */
+#info{
+    margin: 0.5rem 0 0 0;
+    text-align: center;
+    padding: 0.6rem 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: rgb(12 167 160);
+}
+#info input{
+    padding: 0.4rem 0.1rem;
+    border: 1px solid rgb(129, 129, 129);
+    border-radius: 4px;
+    background-color: rgb(11, 229, 236);
+}
+
+/* Main Section */
+#mainContent{
+    /* border: 2px solid green; */
+    display: grid;
+    grid-template-columns: 4fr 2fr 4fr;
+    height: 70vh;
+    text-align: center;
+}
+
+#player,#winnerList,#computer{
+    border:  1px solid red;
+    margin: 0 0.01rem;
+    background-color: rgb(202, 226, 97);
+    padding: 1rem 1rem;
+}
+#player h2,#computer h2{
+    margin-bottom: 0.5rem;
+}
+.fullCont{
+    /* border: 2px solid blue; */
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    overflow: hidden;
+    position: relative;
+}
+.allImg{
+    border: 2px solid rgb(149, 5, 206);
+    border-radius: 2rem;
+}
+#result,#result1{
+    border: 2px solid rgb(104, 50, 205);
+    border-radius: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.finlImg{
+    width: 14rem;
+}
+img{
+    width: 5rem;
+    display: block;
+    margin: 0.6rem 0.3rem;
+    cursor: pointer;
+    clip-path: circle(46.8% at 50% 50%);
+}
+
+/* Winner List Section */
+#winnerList{
+    position: relative;
+}
+.list{
+    margin-top: 1rem;
+}
+.list ul li{
+    list-style: none;
+    color: rgb(50, 6, 92);
+    font-size: larger;
+}
+ul li span{
+    margin-left: 0.4rem;
+    color: darkred;
+}
+
+.currentResult{
+    /* position: absolute; */
+    margin-top: 8rem;
+    bottom: 8rem;
+    left: 2rem;
+    border: 2px solid red;
+    padding: 0.4rem 0.5rem;
+    color: rgb(145, 18, 1);
+}
+
+#startGame{
+    position: absolute;
+    bottom: 1rem;
+    left: 2.4rem;
+    padding: 1rem 1rem;
+    background-color: rgb(17, 167, 226);
+    color: #fff;
+    font-size: medium;
+    cursor: pointer;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+}
+#startGame:hover{
+    background-color: rgba(6, 98, 134, 0.61);
+}
+
+
+/* For JavaScript */
+.finlImg{
+    /* visibility: hidden; */
+    position: absolute;
+    z-index: 1;
+}
+
+.allImgComputer{
+    border: 2px solid yellowgreen;
+    position: relative;
+    bottom: 0rem;
+    animation-name: rocket;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    border: 2px solid rgb(149, 5, 206);
+    border-radius: 2rem;
+}
+
+/* @keyframes rocket {
+    0%{
+        bottom: -100%;
+        opacity: 1;
+    }
+    100%{
+        bottom: 100%;
+        opacity: 1;
+    }
+} */
+
+.cpImg{
+    width: 16rem;
+}
+
+.computerImg{
+    position: absolute;
+    z-index: 1;
+    width: 14rem;
+}

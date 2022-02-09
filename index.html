@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <nav id="navBar">
+            <h2>Rock Paper Scissor</h2>
+            <ul id="ulList">
+                <li><a href="#">Winners</a></li>
+                <li><a href="#">Rules</a></li>
+                <li><a href="#">Help</a></li>
+            </ul>
+        </nav>
+
+        <section id="info">
+            <p class="name">
+                <label for="playerName">Enter your Name: </label>
+                <input type="text" name="name" id="playerName">
+            </p>
+        </section>
+
+        <section id="mainContent">
+            <section id="player">
+                <h2>Select Your Move</h2>
+                <div class="fullCont">
+                    <div class="allImg">
+                        <img src="rock1.jpg" alt="" id="rock">
+                        <img src="paper1.png" alt="" id="paper">
+                        <img src="scissor1.png" alt="" id="scissor">
+                    </div>
+                    <div id="result" >
+                        <img src="rock1.jpg" alt="" id="rockF" class="finlImg">
+                        <img src="paper1.png" alt="" id="paperF" class="finlImg">
+                        <img src="scissor1.png" alt="" id="scissorF" class="finlImg">
+                    </div>
+                </div>
+                
+            </section>
+
+            <section id="winnerList">
+                <h2>Winner List</h2>
+
+                <div class="list">
+                    <ul id="winnerOfGame">
+                        
+                    </ul>
+                </div>
+
+                <div class="currentResult">
+                    <h2 id="whoWin">You Win</h2>
+                </div>
+
+                <button id="startGame">Start Match</button>
+            </section>
+
+            <section id="computer">
+                <h2>Computer move</h2>
+                <div class="fullCont">
+                    <div id="result1" class="cpImg">
+                        <img src="rock1.jpg" alt="" id="rockF1" class="computerImg">
+                        <img src="paper1.png" alt="" id="paperF1" class="computerImg">
+                        <img src="scissor1.png" alt="" id="scissorF1" class="computerImg">
+                    </div>
+
+                    <div class="allImgComputer">
+                        <img src="rock1.jpg" alt="">
+                        <img src="paper1.png" alt="">
+                        <img src="scissor1.png" alt="">
+                    </div>
+                </div>
+            </section>
+        </section>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>

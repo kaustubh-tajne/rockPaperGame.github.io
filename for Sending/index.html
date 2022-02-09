@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            /* background-color: rgb(230, 222, 222); */
+            font-family: sans-serif;
+            background-color: rgba(211, 208, 208, 0.479);
+        }
+
+        /* nav bar */
+        #navBar {
+            display: flex;
+            background-color: rgb(32, 32, 32);
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            color: #fff;
+        }
+
+        #navBar h2 {
+            cursor: pointer;
+        }
+
+        #ulList {
+            display: flex;
+            align-items: center;
+        }
+
+        #ulList li {
+            list-style: none;
+        }
+
+        #ulList li a {
+            text-decoration: none;
+            color: rgb(255, 255, 255);
+            margin: 0 1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            font-size: large;
+        }
+
+        /* Info section */
+        #info {
+            margin: 0.5rem 0 0 0;
+            text-align: center;
+            padding: 0.6rem 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: rgb(12 167 160);
+        }
+
+        #info input {
+            padding: 0.4rem 0.1rem;
+            border: 1px solid rgb(129, 129, 129);
+            border-radius: 4px;
+            background-color: rgb(11, 229, 236);
+        }
+
+        /* Main Section */
+        #mainContent {
+            /* border: 2px solid green; */
+            display: grid;
+            grid-template-columns: 4fr 2fr 4fr;
+            height: 70vh;
+            text-align: center;
+        }
+
+        #player,
+        #winnerList,
+        #computer {
+            border: 1px solid red;
+            margin: 0 0.01rem;
+            background-color: rgb(202, 226, 97);
+            padding: 1rem 1rem;
+        }
+
+        #player h2,
+        #computer h2 {
+            margin-bottom: 0.5rem;
+        }
+
+        .fullCont {
+            /* border: 2px solid blue; */
+            display: grid;
+            grid-template-columns: 1fr 4fr;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .allImg {
+            border: 2px solid rgb(149, 5, 206);
+            border-radius: 2rem;
+        }
+
+        #result,
+        #result1 {
+            border: 2px solid rgb(104, 50, 205);
+            border-radius: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .finlImg {
+            width: 14rem;
+        }
+
+        img {
+            width: 5rem;
+            display: block;
+            margin: 0.6rem 0.3rem;
+            cursor: pointer;
+            clip-path: circle(46.8% at 50% 50%);
+        }
+
+        /* Winner List Section */
+        #winnerList {
+            position: relative;
+        }
+
+        .list {
+            margin-top: 1rem;
+        }
+
+        .list ul li {
+            list-style: none;
+            color: rgb(50, 6, 92);
+            font-size: larger;
+        }
+
+        ul li span {
+            margin-left: 0.4rem;
+            color: darkred;
+        }
+
+        .currentResult {
+            /* position: absolute; */
+            margin-top: 8rem;
+            bottom: 8rem;
+            left: 2rem;
+            border: 2px solid red;
+            padding: 0.4rem 0.5rem;
+            color: rgb(145, 18, 1);
+        }
+
+        #startGame {
+            position: absolute;
+            bottom: 1rem;
+            left: 2.4rem;
+            padding: 1rem 1rem;
+            background-color: rgb(17, 167, 226);
+            color: #fff;
+            font-size: medium;
+            cursor: pointer;
+            font-weight: 600;
+            border: none;
+            border-radius: 4px;
+        }
+
+        #startGame:hover {
+            background-color: rgba(6, 98, 134, 0.61);
+        }
+
+
+        /* For JavaScript */
+        .finlImg {
+            /* visibility: hidden; */
+            position: absolute;
+            z-index: 1;
+        }
+
+        .allImgComputer {
+            border: 2px solid yellowgreen;
+            position: relative;
+            bottom: 0rem;
+            animation-name: rocket;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+            border: 2px solid rgb(149, 5, 206);
+            border-radius: 2rem;
+        }
+
+        /* @keyframes rocket {
+    0%{
+        bottom: -100%;
+        opacity: 1;
+    }
+    100%{
+        bottom: 100%;
+        opacity: 1;
+    }
+} */
+
+        .cpImg {
+            width: 16rem;
+        }
+
+        .computerImg {
+            position: absolute;
+            z-index: 1;
+            width: 14rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <nav id="navBar">
+            <h2>Rock Paper Scissor</h2>
+            <ul id="ulList">
+                <li><a href="#">Winners</a></li>
+                <li><a href="#">Rules</a></li>
+                <li><a href="#">Help</a></li>
+            </ul>
+        </nav>
+
+        <section id="info">
+            <p class="name">
+                <label for="playerName">Enter your Name: </label>
+                <input type="text" name="name" id="playerName">
+            </p>
+        </section>
+
+        <section id="mainContent">
+            <section id="player">
+                <h2>Select Your Move</h2>
+                <div class="fullCont">
+                    <div class="allImg">
+                        <img src="rock1.jpg" alt="" id="rock">
+                        <img src="paper1.png" alt="" id="paper">
+                        <img src="scissor1.png" alt="" id="scissor">
+                    </div>
+                    <div id="result">
+                        <img src="rock1.jpg" alt="" id="rockF" class="finlImg">
+                        <img src="paper1.png" alt="" id="paperF" class="finlImg">
+                        <img src="scissor1.png" alt="" id="scissorF" class="finlImg">
+                    </div>
+                </div>
+
+            </section>
+
+            <section id="winnerList">
+                <h2>Winner List</h2>
+
+                <div class="list">
+                    <ul id="winnerOfGame">
+
+                    </ul>
+                </div>
+
+                <div class="currentResult">
+                    <h2 id="whoWin">You Win</h2>
+                </div>
+
+                <button id="startGame">Start Match</button>
+            </section>
+
+            <section id="computer">
+                <h2>Computer move</h2>
+                <div class="fullCont">
+                    <div id="result1" class="cpImg">
+                        <img src="rock1.jpg" alt="" id="rockF1" class="computerImg">
+                        <img src="paper1.png" alt="" id="paperF1" class="computerImg">
+                        <img src="scissor1.png" alt="" id="scissorF1" class="computerImg">
+                    </div>
+
+                    <div class="allImgComputer">
+                        <img src="rock1.jpg" alt="">
+                        <img src="paper1.png" alt="">
+                        <img src="scissor1.png" alt="">
+                    </div>
+                </div>
+            </section>
+        </section>
+    </div>
+
+
+    <!-- <script src="script.js"></script> -->
+    <script>
+        console.log(132);
+
+        class Game {
+            selectMove() {
+                let result = document.getElementById("rockF");
+                result.style.zIndex = "10";
+            }
+        }
+
+        let rock = document.getElementById("rock");
+        rock.addEventListener("click", rockPut);
+        function rockPut() {
+            let result = document.getElementById("rockF");
+            let r1 = document.getElementById("paperF");
+            let r2 = document.getElementById("scissorF");
+
+            r1.style.zIndex = "-1";
+            r2.style.zIndex = "-2";
+            result.style.zIndex = "11";
+        }
+
+
+        let paper = document.getElementById("paper");
+        paper.addEventListener("click", paperPut);
+        function paperPut() {
+            let result = document.getElementById("paperF");
+
+            let r1 = document.getElementById("rockF");
+            let r2 = document.getElementById("scissorF");
+            r1.style.zIndex = "-1";
+            r2.style.zIndex = "-2";
+
+            result.style.zIndex = "11";
+        }
+
+        let scissor = document.getElementById("scissor");
+        scissor.addEventListener("click", scissorPut);
+        function scissorPut() {
+            let result = document.getElementById("scissorF");
+
+            let r1 = document.getElementById("rockF");
+            let r2 = document.getElementById("paperF");
+
+            // r1.style.zIndex = "-1";
+            // r2.style.zIndex = "-2";
+
+
+            // result.style.zIndex = "11";
+
+            // r1.setAttribute("zIndex","-1");
+            // r2.setAttribute("zIndex","-2");
+            // result.setAttribute("zIndex","11");
+            r1.setAttribute("style", "z-index:-1;");
+            r2.setAttribute("style", "z-index:-2;");
+            result.setAttribute("style", "z-index:11;");
+        }
+
+        // submit btn
+        showList();
+
+        let startGame = document.getElementById("startGame");
+
+        startGame.addEventListener("click", gameStart);
+        let count = 0;
+        function gameStart() {
+            let rockF = document.getElementById("rockF");
+            let paperF = document.getElementById("paperF");
+            let scissorF = document.getElementById("scissorF");
+
+            let rock = rockF.getAttribute("style");
+            let paper = paperF.getAttribute("style");
+            let scissor = scissorF.getAttribute("style");
+
+            let randomNumber = Math.ceil(Math.random() * 3);
+            console.log(randomNumber);
+
+            let result1 = document.getElementById("result1");
+            if (randomNumber == 1) {
+                let r = document.getElementById("rockF1");
+                let p = document.getElementById("paperF1");
+                let s = document.getElementById("scissorF1");
+
+                r.setAttribute("style", "z-index:11;");
+                p.setAttribute("style", "z-index:-1;");
+                s.setAttribute("style", "z-index:-2;");
+            }
+            else if (randomNumber == 2) {
+                let r = document.getElementById("rockF1");
+                let p = document.getElementById("paperF1");
+                let s = document.getElementById("scissorF1");
+
+                r.setAttribute("style", "z-index:-1;");
+                p.setAttribute("style", "z-index:11;");
+                s.setAttribute("style", "z-index:-2;");
+            }
+            else if (randomNumber == 3) {
+                let r = document.getElementById("rockF1");
+                let p = document.getElementById("paperF1");
+                let s = document.getElementById("scissorF1");
+
+                r.setAttribute("style", "z-index:-1;");
+                p.setAttribute("style", "z-index:-2;");
+                s.setAttribute("style", "z-index:11;");
+            }
+
+            let whoWin = document.getElementById("whoWin");
+            if (rock.includes("11")) {
+                if (randomNumber == 1) {
+                    whoWin.innerText = "Match draw";
+                    console.log("Match draw");
+                }
+                else if (randomNumber == 2) {
+                    whoWin.innerText = "Computer Wins";
+                    console.log("Computer Wins");
+                }
+                else if (randomNumber == 3) {
+                    whoWin.innerText = "You Win";
+                    console.log("You Win");
+                    count = count + 1;
+                }
+            }
+            else if (paper.includes("11")) {
+                if (randomNumber == 1) {
+                    whoWin.innerText = "You Win";
+                    console.log("You Win");
+                    count = count + 1;
+                }
+                else if (randomNumber == 2) {
+                    whoWin.innerText = "Match draw";
+                    console.log("Match draw");
+                }
+                else if (randomNumber == 3) {
+                    whoWin.innerText = "Computer Wins";
+                    console.log("Computer Wins");
+                }
+            }
+            else if (scissor.includes("11")) {
+                if (randomNumber == 1) {
+                    whoWin.innerText = "Computer Wins";
+                    console.log("Computer Wins");
+                }
+                else if (randomNumber == 2) {
+                    whoWin.innerText = "You Win";
+                    count = count + 1;
+                    console.log("You Win");
+                }
+                else if (randomNumber == 3) {
+                    whoWin.innerText = "Match draw";
+                    console.log("Match draw");
+                }
+            }
+            showList(count);
+        }
+
+        function showList(count) {
+            let winnerList = document.getElementById("winnerOfGame");
+            let nameOfPlayer = document.getElementById("playerName");
+
+            let uiString = "";
+            uiString += `<li>${nameOfPlayer.value}<span>${count}</span></li>`;
+
+            winnerList.innerHTML = uiString;
+        }
+
+    </script>
+</body>
+
+</html>
